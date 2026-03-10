@@ -1,0 +1,155 @@
+.main {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 16px 80px;
+  position: relative;
+}
+
+.grid {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(249,115,22,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(249,115,22,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  width: 100%;
+  max-width: 520px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 0 0;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logoMark {
+  font-size: 22px;
+  color: var(--accent);
+}
+
+.logoText {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--text);
+}
+
+.nav {
+  display: flex;
+  gap: 20px;
+}
+
+.navLink {
+  font-size: 14px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  transition: color 0.15s;
+}
+
+.navLink:hover {
+  color: var(--text);
+}
+
+/* Hero */
+.hero {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.badge {
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.title {
+  font-size: clamp(36px, 8vw, 52px);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  color: var(--text);
+}
+
+.titleAccent {
+  color: var(--accent);
+}
+
+.subtitle {
+  font-size: 15px;
+  color: var(--text-muted);
+  line-height: 1.6;
+  max-width: 420px;
+}
+
+/* Card */
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.successHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.successBadge {
+  font-size: 13px;
+  font-family: var(--font-mono);
+  color: #22c55e;
+  background: rgba(34, 197, 94, 0.1);
+  padding: 5px 10px;
+  border-radius: 100px;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+}
+
+.resetBtn {
+  font-size: 13px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  background: transparent;
+  transition: color 0.15s;
+}
+
+.resetBtn:hover {
+  color: var(--text);
+}
+
+/* Footer */
+.footer {
+  text-align: center;
+}
+
+.footerText {
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}

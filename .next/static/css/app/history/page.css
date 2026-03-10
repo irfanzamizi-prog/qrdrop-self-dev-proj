@@ -1,0 +1,246 @@
+/*!*****************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[7].use[3]!./components/HistoryCard.module.css ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************/
+.HistoryCard_card__AqsbN {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  transition: border-color 0.15s;
+}
+
+.HistoryCard_card__AqsbN:hover {
+  border-color: #333;
+}
+
+.HistoryCard_expired__6uHm1 {
+  opacity: 0.5;
+}
+
+.HistoryCard_top__25zy0 {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.HistoryCard_qrThumb__pV1Mr {
+  width: 52px;
+  height: 52px;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-shrink: 0;
+  padding: 4px;
+}
+
+.HistoryCard_qrImg__CRp0n {
+  width: 100%;
+  height: 100%;
+  image-rendering: pixelated;
+}
+
+.HistoryCard_info__xbs52 {
+  flex: 1 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.HistoryCard_fileName__3aM0R {
+  font-size: 14px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text);
+}
+
+.HistoryCard_meta__uJVUx {
+  font-size: 12px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+.HistoryCard_expiry__o_VwU {
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+.HistoryCard_expirySoon__j4rl0 {
+  color: #eab308;
+}
+
+.HistoryCard_expiryExpired__EABSF {
+  color: #ef4444;
+}
+
+.HistoryCard_actions__RM4oC {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.HistoryCard_openBtn__hD7TV, .HistoryCard_dlBtn__oRD2G {
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  transition: all 0.15s;
+  background: var(--bg-hover);
+  color: var(--text-dim);
+}
+
+.HistoryCard_openBtn__hD7TV:hover, .HistoryCard_dlBtn__oRD2G:hover {
+  background: #2a2a2a;
+  color: var(--text);
+}
+
+/*!**************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[11].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[11].oneOf[7].use[3]!./app/history/history.module.css ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************/
+.history_main__JUIHK {
+  min-height: 100vh;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 0 16px 80px;
+  position: relative;
+}
+
+.history_grid__bLmZ_ {
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(249,115,22,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(249,115,22,0.03) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.history_container__PqoIG {
+  width: 100%;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+  position: relative;
+  z-index: 1;
+}
+
+.history_header__hGcoR {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 0 0;
+}
+
+.history_backBtn__nQM3Z {
+  font-size: 14px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+  transition: color 0.15s;
+}
+
+.history_backBtn__nQM3Z:hover { color: var(--text); }
+
+.history_logo__utYnK {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.history_logoMark__4o2Rt {
+  font-size: 22px;
+  color: var(--accent);
+}
+
+.history_logoText__1a_02 {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.history_hero__YkDQr {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.history_title__FAuIe {
+  font-size: 40px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+}
+
+.history_accent__Qbg8B { color: var(--accent); }
+
+.history_subtitle__m58Lk {
+  font-size: 14px;
+  font-family: var(--font-mono);
+  color: var(--text-muted);
+}
+
+.history_filters__Uk3bu {
+  display: flex;
+  gap: 8px;
+}
+
+.history_filterBtn__vr9hZ {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--text-muted);
+  font-size: 13px;
+  font-family: var(--font-mono);
+  padding: 6px 16px;
+  transition: all 0.15s;
+}
+
+.history_filterBtn__vr9hZ:hover { color: var(--text); border-color: #444; }
+
+.history_activeFilter__xH_oN {
+  background: var(--accent-dim);
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.history_list__o92OQ {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.history_empty__eBCaM {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 64px 0;
+  text-align: center;
+}
+
+.history_emptyIcon__ygjj_ {
+  font-size: 32px;
+  color: var(--text-muted);
+  opacity: 0.3;
+}
+
+.history_emptyText__zobIA {
+  font-size: 15px;
+  color: var(--text-muted);
+}
+
+.history_emptyLink__iG0O6 {
+  font-size: 14px;
+  font-family: var(--font-mono);
+  color: var(--accent);
+  transition: opacity 0.15s;
+}
+
+.history_emptyLink__iG0O6:hover { opacity: 0.7; }
+
