@@ -25,6 +25,10 @@ export default function HistoryPage() {
     setLoading(false);
   };
 
+  const handleDelete = (id) => {
+    setUploads((prev) => prev.filter((u) => u.id !== id));
+  };
+
   const filtered = uploads.filter((u) => {
     const isExpired = new Date(u.expires_at) < new Date();
     if (filter === "active") return !isExpired;
@@ -75,7 +79,7 @@ export default function HistoryPage() {
             </div>
           ) : (
             filtered.map((record) => (
-              <HistoryCard key={record.id} record={record} />
+              <HistoryCard key={record.id} record={record} onDelete={handleDelete} />
             ))
           )}
         </div>

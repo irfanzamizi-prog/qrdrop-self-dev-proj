@@ -1,11 +1,13 @@
 "use client";
 import { useState, useEffect } from "react";
 import QRCode from "qrcode";
+import { supabase } from "@/lib/supabase";
 import styles from "./HistoryCard.module.css";
 
-export default function HistoryCard({ record }) {
+export default function HistoryCard({ record, onDelete }) {
   const [qrDataUrl, setQrDataUrl] = useState("");
-  const [expanded, setExpanded] = useState(false);
+  const [deleting, setDeleting] = useState(false);
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
   useEffect(() => {
     QRCode.toDataURL(record.file_url, {
@@ -14,6 +16,27 @@ export default function HistoryCard({ record }) {
       color: { dark: "#f97316", light: "#000000" },
     }).then(setQrDataUrl);
   }, [record.file_url]);
+
+  const handleDelete = async () => {
+    if (!confirmDelete) {
+      setConfirmDelete(true);
+      setTimeout(() => setConfirmDelete(false), 3000);
+      return;
+    }
+    setDeleting(true);
+    try {
+      // Delete from storage
+      await supabase.storage.from("qrdrop-files").remove([record.storage_path]);
+      // Delete from DB
+      await supabase.from("uploads").delete().eq("id", record.id);
+      onDelete(record.id);
+    } catch (err) {
+      console.error("Delete failed:", err);
+    } finally {
+      setDeleting(false);
+      setConfirmDelete(false);
+    }
+  };
 
   const isExpired = new Date(record.expires_at) < new Date();
   const daysLeft = Math.ceil((new Date(record.expires_at) - new Date()) / (1000 * 60 * 60 * 24));
@@ -60,6 +83,14 @@ export default function HistoryCard({ record }) {
           )}
           <button className={styles.dlBtn} onClick={handleDownload} title="Download QR">
             ↓
+          </button>
+          <button
+            className={`${styles.deleteBtn} ${confirmDelete ? styles.confirmBtn : ""}`}
+            onClick={handleDelete}
+            disabled={deleting}
+            title={confirmDelete ? "Click again to confirm" : "Delete file"}
+          >
+            {deleting ? "..." : confirmDelete ? "Sure?" : "🗑"}
           </button>
         </div>
       </div>

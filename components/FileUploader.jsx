@@ -19,6 +19,15 @@ export default function FileUploader({ onUploadSuccess }) {
     setError("");
   };
 
+  const handleRemove = (e) => {
+    e.stopPropagation();
+    e.preventDefault();
+    setFile(null);
+    setError("");
+    // Reset the file input so the same file can be re-selected
+    if (inputRef.current) inputRef.current.value = "";
+  };
+
   const handleDrop = (e) => {
     e.preventDefault();
     setDragging(false);
@@ -77,7 +86,7 @@ export default function FileUploader({ onUploadSuccess }) {
               <span className={styles.fileName}>{file.name}</span>
               <span className={styles.fileSize}>{formatSize(file.size)}</span>
             </div>
-            <button className={styles.removeBtn} onClick={(e) => { e.stopPropagation(); setFile(null); }}>
+            <button className={styles.removeBtn} onClick={handleRemove}>
               ✕
             </button>
           </div>
