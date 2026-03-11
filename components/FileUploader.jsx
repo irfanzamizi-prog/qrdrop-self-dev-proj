@@ -86,7 +86,7 @@ export default function FileUploader({ onUploadSuccess }) {
               <span className={styles.fileName}>{file.name}</span>
               <span className={styles.fileSize}>{formatSize(file.size)}</span>
             </div>
-            <button className={styles.removeBtn} onClick={handleRemove}>
+            <button type="button" className={styles.removeBtn} onClick={handleRemove}>
               ✕
             </button>
           </div>
