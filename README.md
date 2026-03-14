@@ -1,33 +1,61 @@
-# ◈ QRDrop — File to QR Code Generator
+# ◈ QRDrop
 
-Upload any file and get a shareable QR code. Built with Next.js 14 + Supabase.
+**Upload any file or paste any link. Get a scannable QR code instantly.**
+
+QRDrop lets you upload any file — PDF, image, video, zip, and more — or paste any URL, and generates a QR code linked to it. Share the QR code with anyone and they can scan it to access your file or link directly.
+
+🔗 **Live Demo:** [qrdrop-self-dev-proj.vercel.app](https://qrdrop-self-dev-proj.vercel.app)
 
 ---
 
-## 🚀 Setup Guide (Step by Step)
+## ✨ Features
 
-### STEP 1 — Install dependencies
+- 📁 **Upload any file** — PDF, image, video, zip, documents, and more (up to 50MB)
+- 🔗 **Link to QR** — paste any URL and instantly generate a QR code, no upload needed
+- 🔳 **Instant QR code** — generated immediately after upload or link input
+- 🎨 **Custom QR styles** — 6 color presets + full custom color picker
+- 📋 **Upload history** — view all past uploads with expiry status
+- 🗑️ **Delete uploads** — remove files from storage and history anytime
+- ⏳ **Auto file expiry** — files auto-delete after 1, 3, 7, 14, or 30 days
+- 🌙 **Dark UI** — clean, modern dark interface
 
-Open this folder in VS Code, open the terminal, and run:
+---
 
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend + Backend | Next.js 14 (App Router) |
+| Database + Storage | Supabase |
+| QR Generation | qrcode (npm) |
+| Deployment | Vercel |
+| Styling | CSS Modules |
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- Node.js 18+
+- A [Supabase](https://supabase.com) account (free)
+- A [Vercel](https://vercel.com) account (free)
+
+### Installation
+
+1. **Clone the repo**
+```bash
+git clone https://github.com/irfanzamizi-prog/qrdrop-self-dev-proj.git
+cd qrdrop-self-dev-proj
+```
+
+2. **Install dependencies**
 ```bash
 npm install
 ```
 
----
+3. **Set up Supabase**
 
-### STEP 2 — Create Supabase project
-
-1. Go to https://supabase.com and sign up (free)
-2. Click "New Project" → give it a name like `qrdrop`
-3. Wait for it to finish setting up (~1 min)
-
----
-
-### STEP 3 — Set up Supabase database table
-
-In your Supabase project, go to **SQL Editor** and run this:
-
+Create a new Supabase project and run this in the SQL Editor:
 ```sql
 CREATE TABLE uploads (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -40,82 +68,29 @@ CREATE TABLE uploads (
   expires_at TIMESTAMP WITH TIME ZONE NOT NULL,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
-```
 
----
-
-### STEP 4 — Set up Supabase Storage bucket
-
-1. In Supabase, go to **Storage** → click "New bucket"
-2. Name it exactly: `qrdrop-files`
-3. Check **"Public bucket"** → click Save
-4. Go to **Policies** → Add policy → For "SELECT": Allow public access
-5. Add another policy for "INSERT": Allow all inserts (or set to authenticated only later)
-
-Quick policy SQL (run in SQL Editor):
-```sql
--- Allow public read
 CREATE POLICY "Public read" ON storage.objects FOR SELECT USING (bucket_id = 'qrdrop-files');
-
--- Allow public upload
 CREATE POLICY "Public upload" ON storage.objects FOR INSERT WITH CHECK (bucket_id = 'qrdrop-files');
-
--- Allow public delete (for cleanup cron)
 CREATE POLICY "Public delete" ON storage.objects FOR DELETE USING (bucket_id = 'qrdrop-files');
 ```
 
----
+Also create a **public storage bucket** named `qrdrop-files`.
 
-### STEP 5 — Get your Supabase keys
+4. **Configure environment variables**
 
-1. In Supabase, go to **Settings → API**
-2. Copy:
-   - `Project URL` (looks like https://xxxx.supabase.co)
-   - `anon public` key
-
----
-
-### STEP 6 — Set up environment variables
-
-1. Rename `.env.local.example` to `.env.local`
-2. Fill in your values:
-
+Rename `.env.local.example` to `.env.local` and fill in:
 ```env
 NEXT_PUBLIC_SUPABASE_URL=https://your-project-id.supabase.co
-NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key-here
-CRON_SECRET=make-up-any-random-string-here
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+CRON_SECRET=any-random-string
 ```
 
----
-
-### STEP 7 — Run locally
-
+5. **Run locally**
 ```bash
 npm run dev
 ```
 
-Open http://localhost:3000 — you should see QRDrop! 🎉
-
----
-
-### STEP 8 — Deploy to Vercel
-
-1. Push this project to GitHub:
-   ```bash
-   git init
-   git add .
-   git commit -m "initial commit"
-   git remote add origin https://github.com/YOUR_USERNAME/qrdrop.git
-   git push -u origin main
-   ```
-
-2. Go to https://vercel.com → "New Project" → Import your GitHub repo
-
-3. During import, add your environment variables (same as .env.local)
-
-4. Click Deploy → Done! 🚀
-
-5. Your cleanup cron job (auto-delete expired files) runs daily at 2AM automatically because of `vercel.json`.
+Open [http://localhost:3000](http://localhost:3000) 🎉
 
 ---
 
@@ -124,31 +99,33 @@ Open http://localhost:3000 — you should see QRDrop! 🎉
 ```
 qrdrop/
 ├── app/
-│   ├── page.jsx              ← Main upload + QR page
-│   ├── history/page.jsx      ← Upload history
+│   ├── page.jsx                 ← Main page (File Upload + Link to QR tabs)
+│   ├── history/page.jsx         ← Upload history page
 │   └── api/
-│       ├── upload/route.js   ← File upload handler
-│       └── cleanup/route.js  ← Expired file cleanup (cron)
+│       ├── upload/route.js      ← File upload handler
+│       └── cleanup/route.js     ← Expired file cleanup (cron)
 ├── components/
-│   ├── FileUploader.jsx      ← Drag & drop uploader
-│   ├── QRDisplay.jsx         ← QR code with color picker
-│   └── HistoryCard.jsx       ← History list item
+│   ├── FileUploader.jsx         ← Drag & drop file uploader
+│   ├── LinkQR.jsx               ← URL input for link to QR
+│   ├── QRDisplay.jsx            ← QR code generator + color picker
+│   └── HistoryCard.jsx          ← History list card with delete
 ├── lib/
-│   └── supabase.js           ← Supabase client
-└── vercel.json               ← Cron job config
+│   └── supabase.js              ← Supabase client
+└── vercel.json                  ← Cron job config (runs daily at 2AM)
 ```
 
 ---
 
-## ✨ Features
+## 🌐 Deployment
 
-- Upload any file (PDF, image, video, zip, etc.) — max 50MB
-- Auto-generates QR code linked to uploaded file
-- Custom QR color themes + color picker
-- Upload history with expiry tracking
-- Files auto-delete after chosen expiry period (1–30 days)
-- Daily cleanup cron job runs on Vercel
+This project is deployed on **Vercel**. Every push to `main` automatically triggers a new deployment.
+
+The cleanup cron job (`/api/cleanup`) runs daily at 2:00 AM UTC via Vercel Cron Jobs, automatically deleting expired files from both Supabase Storage and the database.
 
 ---
 
-Built by Irfan · Powered by Next.js + Supabase + Vercel
+## 👨‍💻 Author
+
+**Irfan Muhaimin**
+- GitHub: [@irfanzamizi-prog](https://github.com/irfanzamizi-prog)
+- Diploma in Computer Science — Kolej Profesional MARA Indera Mahkota
